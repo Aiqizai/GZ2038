@@ -20,11 +20,30 @@ export default function Todo() {
             }
         ])
     }
+    // 切换状态
+    function toggleTodo(id) {
+        // 根据 id 查找 todos 匹配的 反转completed
+        // 返回新数组
+        setTodos(todos.map((todo)=> {
+            if(todo.id === id) {
+                return {...todo, completed: !todo.completed}
+            }else {
+                return {...todo}
+            }
+        }))
+    }
+    // 删除todo
+    function removeTodo(id) {
+        setTodos(todos.filter((todo)=> {
+            return todo.id !== id
+        }))
+    }
+
     return (
         <div>
             <AddTodo addTodo={addTodo}/>
 
-            <TodoList todos={todos} />
+            <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo}/>
         </div>
     )
 }
